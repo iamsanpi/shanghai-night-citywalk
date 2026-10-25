@@ -1,0 +1,2 @@
+QUALITY_GATE_PRECOMMIT='node --check app.js && node scripts/check-site.mjs'
+QUALITY_GATE_PREPUSH='node --check app.js && node scripts/check-site.mjs'

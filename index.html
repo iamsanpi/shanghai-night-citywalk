@@ -7,7 +7,9 @@
   <meta name="description" content="上海地标夜景拍摄图文路书：实景参考、公共步道站位、拍摄朝向与苹果地图步行导航。两晚和一晚方案。">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>上海夜景 Citywalk · 手机拍摄路书</title>
-  <link rel="stylesheet" href="style.css?v=fixed-shots-20261025">
+  <link rel="canonical" href="https://iamsanpi.github.io/shanghai-night-citywalk/">
+  <script src="entry.js?v=map-entry-20261025"></script>
+  <link rel="stylesheet" href="style.css?v=map-entry-20261025">
   <link rel="stylesheet" href="vendor/leaflet.css">
 </head>
 <body>
@@ -20,6 +22,11 @@
     </div>
   </header>
   <main class="wrap">
+    <aside id="local-file-notice" class="local-file-notice" hidden>
+      <strong>请使用在线路书查看地图</strong>
+      <p>当前是本地文件。正在转到在线版；若没有自动打开，请点下面的入口。原来的拍摄卡片仍可阅读。</p>
+      <a class="action primary" href="https://iamsanpi.github.io/shanghai-night-citywalk/#map-overview">打开在线路书与地图 ↗</a>
+    </aside>
     <nav class="plan-switch" aria-label="选择拍摄方案">
       <button type="button" data-plan="night1" aria-pressed="true">两晚 · 第1晚</button>
       <button type="button" data-plan="night2" aria-pressed="false">两晚 · 第2晚</button>
@@ -69,7 +76,7 @@
   <a class="back-top" href="#route-title" aria-label="返回拍摄路线">路线 ↑</a>
   <script src="vendor/leaflet.js"></script>
   <script src="map-data.js?v=map-20261025"></script>
-  <script src="roadbook-map.js?v=map-20261025"></script>
-  <script src="app.js?v=fixed-shots-20261025"></script>
+  <script src="roadbook-map.js?v=map-entry-20261025"></script>
+  <script src="app.js?v=map-entry-20261025"></script>
 </body>
 </html>

@@ -39,8 +39,30 @@ for(const id of Object.keys(spots)){
  assert.ok(lat>31.19&&lat<31.26&&lon>121.42&&lon<121.52,'Point outside filming areas: '+id);
  assert.ok(mapData.points[id].source,'Missing point source '+id);
 }
-for(const path of ['index.html','app.js','style.css','README.md']){
+for(const path of ['index.html','app.js','style.css','README.md','entry.js','roadbook-map.js']){
  const text=fs.readFileSync(path,'utf8');
  assert.ok(!text.includes('/Users/haibo/')&&!text.includes('localhost')&&!text.includes('127.0.0.1'),'Local/private path in public file '+path);
 }
-console.log('Public content, requested landmarks, numbered map points, foot-route geometry and map links checked.');
+const entrySource=fs.readFileSync('entry.js','utf8');
+function entryEnvironment(protocol,search,hash,blocked=false){
+ const redirects=[],events={},anchor={},notice={hidden:true,querySelector:()=>anchor};
+ const env={URL,URLSearchParams,window:{},location:{protocol,search,hash,replace:url=>{if(blocked)throw new Error('Navigation blocked');redirects.push(url);}},document:{addEventListener:(name,fn)=>{events[name]=fn;},getElementById:()=>notice}};
+ vm.createContext(env);vm.runInContext(entrySource,env);
+ return{env,redirects,events,anchor,notice};
+}
+for(const plan of ['night1','night2','one']){
+ const r=entryEnvironment('file:','?plan='+plan+'&ignored=value','#fixed-peace');
+ assert.equal(r.redirects[0],'https://iamsanpi.github.io/shanghai-night-citywalk/?plan='+plan+'#fixed-peace','Local entry must preserve plan and filming position without forwarding unknown parameters');
+}
+for(const protocol of ['http:','https:'])assert.equal(entryEnvironment(protocol,'?plan=one','#map-overview').redirects.length,0,'Web entry must not redirect');
+const blockedEntry=entryEnvironment('file:','?plan=one','#map-overview',true);
+blockedEntry.events.DOMContentLoaded();
+assert.equal(blockedEntry.notice.hidden,false,'Blocked local redirect needs a visible online link');
+assert.equal(blockedEntry.anchor.href,'https://iamsanpi.github.io/shanghai-night-citywalk/?plan=one#map-overview');
+const localNodes={};
+const localMapContext={location:{protocol:'file:'},window:{CitywalkEntry:blockedEntry.env.window.CitywalkEntry},L:{map:()=>assert.fail('Local file must never initialize an online tile map')},document:{getElementById:id=>localNodes[id]??=( {replaceChildren(...children){this.children=children;}} ),createElement:tag=>({tag})}};
+vm.createContext(localMapContext);vm.runInContext(fs.readFileSync('roadbook-map.js','utf8'),localMapContext);
+localMapContext.window.CitywalkOverview.render('one',{},spots,maps);
+assert.equal(localNodes['overview-map'].hidden,true);
+assert.equal(localNodes['map-status'].children[1].href,'https://iamsanpi.github.io/shanghai-night-citywalk/?plan=one#map-overview');
+console.log('Public content, foot routes, fixed-shot tasks, local-file redirect and no-local-tile regressions checked.');

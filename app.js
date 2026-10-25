@@ -115,6 +115,7 @@ function make(tag,attrs={},text){const n=document.createElement(tag);for(const[k
 function link(text,url,cls=''){return make('a',{href:url,...(cls?{class:cls}:{}),target:'_blank',rel:'noopener'},text);}
 function field(dl,label,value){dl.append(make('dt',{},label),make('dd',{},value));}
 function render(planKey){
+ window.CitywalkEntry?.updateLocalNotice(planKey);
  const plan=plans[planKey];document.querySelectorAll('[data-plan]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.plan===planKey)));
  document.getElementById('route-title').textContent=plan.title;document.getElementById('route-summary').textContent=plan.summary;
  const whole=document.getElementById('whole-links');whole.replaceChildren();plan.links.forEach(([label,from,to,waypoints],i)=>whole.append(link(label+' ↗',maps.walk(from,to,waypoints),'action'+(i===0?' primary':''))));

@@ -1,8 +1,9 @@
 'use strict';
 const maps={
-  place(query){return 'https://maps.apple.com/search?'+new URLSearchParams({query:'上海 '+query});},
+  name(query){return query.startsWith('上海')?query:'上海 '+query;},
+  place(query){return 'https://maps.apple.com/search?'+new URLSearchParams({query:this.name(query)});},
   pin(lat,lon,name){return 'https://maps.apple.com/place?'+new URLSearchParams({coordinate:lat+','+lon,name});},
-  walk(from,to,waypoints=[],mode='walking'){const p=new URLSearchParams({source:'上海 '+from,destination:'上海 '+to,mode});waypoints.forEach(w=>p.append('waypoint','上海 '+w));return 'https://maps.apple.com/directions?'+p;}
+  walk(from,to,waypoints=[],mode='walking'){const p=new URLSearchParams({source:this.name(from),destination:this.name(to),mode});waypoints.forEach(w=>p.append('waypoint',this.name(w)));return 'https://maps.apple.com/directions?'+p;}
 };
 const photoBase='https://whb-oss.oss-cn-shanghai.aliyuncs.com/zhuzhan/rd/20221231/501871.html';
 const spots={
@@ -36,7 +37,7 @@ function render(planKey){
   const s=spots[id],next=plan.stops[i+1],taxi=plan.taxi===i;
   const li=make('li'),num=make('span',{class:'route-num'},i+1),rt=make('div',{class:'route-text'}),jump=make('a',{href:'#spot-'+id},s.short);
   rt.append(jump,make('div',{class:'route-time'},time));
-  if(next){const leg=make('div',{class:'leg'+(taxi?' taxi':'')});leg.append(link(taxi?'跨区打车进入下一片区 ↗':'步行去下一站 ↗',maps.walk(s.poi,spots[next[0]].poi,[],taxi?'driving':'walking')));rt.append(leg);}
+  if(next){const leg=make('div',{class:'leg'+(taxi?' taxi':'')});leg.append(make('div',{class:'leg-names'},maps.name(s.poi)+' → '+maps.name(spots[next[0]].poi)),link(taxi?'跨区打车进入下一片区 ↗':'步行去下一站 ↗',maps.walk(s.poi,spots[next[0]].poi,[],taxi?'driving':'walking')));rt.append(leg);}
   li.append(num,rt);list.append(li);
   const article=make('article',{class:'spot',id:'spot-'+id}),header=make('div',{class:'spot-header'});
   header.append(make('p',{class:'spot-kicker'},'第'+(i+1)+'站 · '+time),make('h3',{},s.name),make('p',{class:'spot-sub'},s.subtitle));article.append(header);
@@ -53,6 +54,14 @@ function render(planKey){
   actions.append(link(s.pin?'打开作者标注站位 ↗':'苹果地图 · 站位附近 ↗',pin,'action primary'));
   if(next)actions.append(link(taxi?'打车进入下一片区 ↗':'步行去下一站 ↗',maps.walk(s.poi,spots[next[0]].poi,[],taxi?'driving':'walking'),'action'+(taxi?' taxi':'')));
   body.append(actions);
+  if(next){
+   const manual=make('div',{class:'manual-nav'}),dl=make('dl');
+   field(dl,'手动导航起点',maps.name(s.poi));field(dl,'手动导航终点',maps.name(spots[next[0]].poi));
+   const copy=make('button',{type:'button',class:'copy-button'},'复制本段起终点');
+   const status=make('span',{class:'copy-status','aria-live':'polite'});
+   copy.addEventListener('click',async()=>{const text=(taxi?'打车转场':'步行段')+'\n起点：'+maps.name(s.poi)+'\n终点：'+maps.name(spots[next[0]].poi);try{await navigator.clipboard.writeText(text);status.textContent='已复制';}catch{status.textContent='请长按上方名称复制';}});
+   manual.append(dl,copy,status);body.append(manual);
+  }else{body.append(make('p',{class:'small'},'本片区终点：'+maps.name(s.poi)+'。收机后步行离开核心人流，再导航回程。'));}
   [['站哪儿',s.stand],['朝哪儿',s.face],['怎么构图',s.frame],['怎么拍、怎么接',s.sequence],['接着走',s.next]].forEach(([a,b])=>{const dl=make('dl',{class:'field'});field(dl,a,b);body.append(dl);});
   body.append(make('p',{class:'small'},s.note));
   if(s.positionSource){const p=make('p',{class:'source-detail'});p.append(link('查看机位区域的现场报道',s.positionSource));body.append(p);}

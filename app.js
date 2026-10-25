@@ -52,6 +52,7 @@ function render(planKey){
   if(s.bearing){const bearing=make('div',{class:'bearing'}),text=make('div');text.append(make('small',{},'拍摄朝向'),make('strong',{},s.bearing));bearing.append(make('span',{class:'bearing-mark','aria-hidden':'true'},s.arrow),text);body.append(bearing);}
   const actions=make('div',{class:'actions'}),pin=s.pin?maps.pin(...s.pin,'和平饭店外滩平台参考站位'):maps.place(s.poi);
   actions.append(link(s.pin?'打开作者标注站位 ↗':'苹果地图 · 站位附近 ↗',pin,'action primary'));
+  const onMap=make('button',{type:'button',class:'action'},'在总览中查看');onMap.addEventListener('click',()=>window.CitywalkOverview?.focus(id));actions.append(onMap);
   if(next)actions.append(link(taxi?'打车进入下一片区 ↗':'步行去下一站 ↗',maps.walk(s.poi,spots[next[0]].poi,[],taxi?'driving':'walking'),'action'+(taxi?' taxi':'')));
   body.append(actions);
   if(next){
@@ -68,6 +69,7 @@ function render(planKey){
   if(!s.image)body.append(make('p',{class:'no-photo'},'沿途连接站：本卡提供走法与取景任务，没有用其他机位的照片代替实景。'));
   article.append(body);cards.append(article);
  });
+ window.CitywalkOverview?.render(planKey,plan,spots,maps);
 }
 let selected='night1';try{const q=new URLSearchParams(location.search).get('plan');if(plans[q])selected=q;}catch{}
 document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{selected=b.dataset.plan;render(selected);const url=new URL(location.href);url.searchParams.set('plan',selected);url.hash='';history.replaceState(null,'',url);}));

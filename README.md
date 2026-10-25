@@ -2,6 +2,15 @@
 
 静态手机网页：两晚、一晚方案；每个主机位有实景参考、公共步道站位、朝向、拍摄顺序、苹果地图定位和逐段步行导航。
 
+地图总览随方案切换：编号与卡片顺序一致；点编号看实景、简要站位、完整卡片和苹果地图导航。片区按钮用于放大密集点位。每张卡片也可返回地图定位本机位。
+
+## 地图资料
+
+- 底图与地标路网来自 [OpenStreetMap](https://www.openstreetmap.org/copyright)，ODbL 1.0；地图代码使用 Leaflet 1.9.4，许可见 `vendor/LEAFLET-LICENSE`。
+- 机位坐标是地标附近定位；和平饭店采用参考照片作者公开坐标。东泰路/花园石桥路路口由两条OSM道路的共同端点确定。公开OSM对象链接保存在 `map-data.js`，具体站位以卡片为准。
+- 绿色连线来自 [FOSSGIS / OSRM](https://routing.openstreetmap.de/about.html) 的 foot 路网规划。橙色虚线仅表示跨片区打车，不是驾车道路轨迹。总览路线不是苹果地图导出的轨迹；现场通行和具体导航以实际指引为准。
+- 仅一次性查询少量公共地标与步行段，串行并缓存，频率低于每秒一次。页面没有在线地名搜索、地理编码或动态路径规划服务。遵循 [Nominatim政策](https://operations.osmfoundation.org/policies/nominatim/)、[OSM瓦片政策](https://operations.osmfoundation.org/policies/tiles/) 与 [FOSSGIS政策](https://routing.openstreetmap.de/about.html)。底图由浏览器按当前可见区域加载，不预下载、不提供离线地图。
+
 ## 使用
 
 直接打开 GitHub Pages。可用 `?plan=night1`、`?plan=night2`、`?plan=one` 选择方案。网站不收集位置、登录或行程数据。

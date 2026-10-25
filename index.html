@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#132c36">
   <meta name="description" content="上海地标夜景拍摄图文路书：实景参考、公共步道站位、拍摄朝向与苹果地图步行导航。两晚和一晚方案。">
-  <meta name="referrer" content="no-referrer">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>上海夜景 Citywalk · 手机拍摄路书</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=map-20261025">
+  <link rel="stylesheet" href="vendor/leaflet.css">
 </head>
 <body>
   <header class="masthead">
@@ -29,6 +30,15 @@
       <h2 id="route-title"></h2>
       <p id="route-summary"></p>
       <div id="whole-links" class="actions"></div>
+      <section class="map-overview" id="map-overview" aria-labelledby="map-heading">
+        <div class="map-heading-row"><h3 id="map-heading">地图总览</h3><span class="small">点编号，看机位</span></div>
+        <div id="map-areas" class="map-areas" aria-label="放大拍摄片区"></div>
+        <label class="map-picker">快速选机位 <select id="map-pick" aria-label="按编号选择机位"></select></label>
+        <div id="overview-map" aria-label="当前路线的编号拍摄位与步行路线地图"></div>
+        <div class="map-legend"><span><i class="legend-walk"></i>步行规划线</span><span><i class="legend-transfer"></i>跨区打车示意</span></div>
+        <p class="map-help" id="map-status" aria-live="polite">可拖动、双指缩放。点编号可看实景、站位和苹果地图导航。</p>
+        <p class="map-source">底图与路网：© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>；步行规划：<a href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noopener">FOSSGIS / OSRM</a>。机位为附近定位，精确站位见卡片；虚线仅表示跨片区，不是驾车轨迹。<a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener">报告地图问题</a></p>
+      </section>
       <ol id="route-list" class="route-list"></ol>
       <details class="use-note"><summary>地图与现场怎么用</summary>
         <p>在 iPhone 用苹果地图 App 打开链接。整组路线若只显示起终点，就用每段的“步行去下一站”。本机苹果地图网页版曾未能取得上海步行路线，网页与 App 的能力可能不同。</p>
@@ -51,6 +61,9 @@
     </footer>
   </main>
   <a class="back-top" href="#route-title" aria-label="返回拍摄路线">路线 ↑</a>
-  <script src="app.js"></script>
+  <script src="vendor/leaflet.js"></script>
+  <script src="map-data.js?v=map-20261025"></script>
+  <script src="roadbook-map.js?v=map-20261025"></script>
+  <script src="app.js?v=map-20261025"></script>
 </body>
 </html>

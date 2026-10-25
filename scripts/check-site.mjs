@@ -5,8 +5,8 @@ import assert from 'node:assert/strict';
 const js=fs.readFileSync('app.js','utf8');
 const context={URLSearchParams};
 vm.createContext(context);
-vm.runInContext(js.slice(0,js.indexOf('function make('))+'\nglobalThis.data={spots,plans,maps};',context);
-const {spots,plans,maps}=context.data;
+vm.runInContext(js.slice(0,js.indexOf('function make('))+'\nglobalThis.data={spots,plans,maps,fixedShots};',context);
+const {spots,plans,maps,fixedShots}=context.data;
 const mapContext={window:{}};
 vm.createContext(mapContext);
 vm.runInContext(fs.readFileSync('map-data.js','utf8'),mapContext);
@@ -17,7 +17,7 @@ for(const id of ['north','bridge','peace','towers','customs'])assert.ok(spots[id
 for(const [id,plan]of Object.entries(plans)){
   assert.equal(id==='night1'?0:1,Number.isInteger(plan.taxi)?1:0,'Incorrect taxi transition count');
   for(const [spot]of plan.stops)assert.ok(spots[spot],'Unknown route stop '+spot);
-  for(const stop of plan.stops){const s=spots[stop[0]];assert.ok(s.poi&&s.stand&&s.face&&s.sequence&&s.next,'Incomplete field instructions');}
+  for(const stop of plan.stops){const s=spots[stop[0]],shot=fixedShots[stop[0]];assert.ok(s.poi&&s.stand&&s.face&&s.sequence&&s.next,'Incomplete field instructions');assert.ok(shot?.frame&&shot.wait&&shot.end&&shot.next&&shot.fallback,'Missing fixed-shot field task: '+stop[0]);}
   for(let i=0;i<plan.stops.length-1;i++){
     if(plan.taxi===i)continue;
     const key=plan.stops[i][0]+'>'+plan.stops[i+1][0];

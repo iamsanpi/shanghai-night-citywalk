@@ -12,8 +12,8 @@ vm.createContext(mapContext);
 vm.runInContext(fs.readFileSync('map-data.js','utf8'),mapContext);
 new vm.Script(fs.readFileSync('roadbook-map.js','utf8'));
 const mapData=mapContext.window.CITYWALK_MAP_DATA;
-assert.equal(Object.values(spots).filter(s=>s.image).length,7,'Seven real composition references are required');
-for(const id of ['north','bridge','peace','towers'])assert.ok(spots[id].image&&spots[id].stand&&spots[id].face,'Missing requested landmark content: '+id);
+assert.equal(Object.values(spots).filter(s=>s.image).length,8,'Eight real composition references are required');
+for(const id of ['north','bridge','peace','towers','customs'])assert.ok(spots[id].image&&spots[id].stand&&spots[id].face,'Missing requested landmark content: '+id);
 for(const [id,plan]of Object.entries(plans)){
   assert.equal(id==='night1'?0:1,Number.isInteger(plan.taxi)?1:0,'Incorrect taxi transition count');
   for(const [spot]of plan.stops)assert.ok(spots[spot],'Unknown route stop '+spot);

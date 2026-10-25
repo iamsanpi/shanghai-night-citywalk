@@ -19,6 +19,7 @@
 
 - 图片以原始来源网址加载；除另行标注的开放许可外，图片权利归原作者。不将外部参考照片纳入本仓库。
 - 和平饭店参考照片：N509FZ，2019-11-13，[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Peace_Hotel_Shanghai_(20191113200111).jpg)，[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)，原图不修改。作者公开站位坐标与约305°朝向。文件说明不等于当天通行边界。
+- 海关与浦发银行同框：Hermann Luyken，2014-11-15，[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:2014.11.15.192034_HSBC_Building_Customs_House_Bund_night_Shanghai.jpg)，[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)。仅作南侧朝西北的构图参考，现有导航点仍是海关附近平台。
 - 北外滩、乍浦路桥：文汇网，范家乐，《2022年，上海，我记录下的50个瞬间》。
 - 外白渡桥：上观号，绿色上海，2023-08-02。
 - 武康大楼：凤凰网转载，来源南风窗，2023-10-16。

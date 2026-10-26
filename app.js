@@ -107,6 +107,17 @@ const fixedShots={
  }
 };
 const plans={
+ wed:{title:'周三浦东 · 江边黄昏 → 明珠 → 三件套',summary:'16:00—16:30从浦东办事地点出发，先打车到浦东美术馆附近，再走到西侧公共滨江。争取17:00前抵达；出发地址待补，抵达时间不是车程保证。此后全程步行，连接段约1.8公里，含取景、上桥与找角度留2.5—3.5公里预算。',stops:[['museum','争取16:45 - 17:50'],['pearl','18:10 - 18:45'],['ring','18:50 - 19:25'],['towers','19:45 - 21:30；22:00前离场']],links:[['周三整段步行路线','浦东美术馆','花园石桥路与东泰路交叉口',['东方明珠广播电视塔','明珠环岛与陆家嘴环路交叉口']]],notes:[
+  ['先拍天色，再拍灯光','先按本周三2026年10月28日安排：上海日落约17:10，民用暮光约17:34结束，天气决定实际天色。江边先拍外滩轮廓、天色与船；18:00后把重点转到明珠和高楼夜景，亮灯以现场为准。','日出日落表','https://www.daysfromdate.com/zh-cn/sunrise/cn/shanghai-shi/shanghai-municipality/'],
+  ['拍成三个篇章','①黄昏江面与对岸老上海；②东方明珠、天桥与人车；③走到三件套脚下，以高楼和人物尺度收尾。19:25—19:45先给步行，抵达后三件套段可插入20分钟补给休息。'],
+  ['另一晚怎么接','另一晚走“两晚·第1晚”的北外滩 → 外白渡桥 → 乍浦路桥 → 外滩源 → 和平饭店 → 海关。周三不加武康路；武康大楼留给另一个白天或原方案，不塞进这两晚的主线。'],
+  ['晚到也能拍','17:30后才到江边：不追落日，第一站缩到20—30分钟拍江面与船，再按顺序前进；全程晚了就各站保留一组完整动作，优先保住东方明珠和三件套。']
+ ],overrides:{
+  museum:{subtitle:'周三起点 · 先在浦东看黄昏与对岸外滩',sequence:'走到西侧公共滨江 → 江面与外滩整体 → 固定等船经过 → 白墙或水纹细节 → 离开江边走向东方明珠。',next:'沿开放公共步道离开江边，按本段导航走到东方明珠南侧公共外围，约700米，留15—20分钟。',note:'只拍室外公共空间，不依赖美术馆开馆、室内、镜厅或屋顶。若已错过天色，就拍江面与船后继续。',fixed:{wait:'等一条船从黄昏江面或外滩轮廓前完整经过；不以建筑已经亮灯为前提，也不转镜头追船。',end:'船尾离开画面后再留5秒；另留10秒江风声。',next:'停录后另摆水纹或白墙与行人的细节，再录离开滨江、沿公共步道走向东方明珠的一条。',fallback:'等1—2分钟无合适船，就录20—30秒天色、江面和江风，随后继续，不无限等船。'}},
+  pearl:{subtitle:'完整塔身与行人 · 周三第二站',face:'正对东方明珠，以塔为方向参照。完整塔身拍完后，走向南侧明珠环街口公共人行道。',next:'按地图向南短走至明珠环岛与陆家嘴环路交叉口公共人行道，连接段约150米；找桥下框景，再找开放上桥入口。',fixed:{next:'停录后另摆塔身局部8—12秒，再录向南走到明珠环街口的一条，让完整塔身接到下一条桥下框景。'}},
+  ring:{subtitle:'明珠拍完，再用天桥弧线与人车变化构图',sequence:'从塔外围走到桥下 → 弧线框景定住等车 → 找开放入口上桥 → 扶手与行人 → 下桥走向三件套。',next:'拍完沿开放通道回到地面，向东南按步行导航去花园石桥路与东泰路交叉口。连接段约930米，留20分钟；上、下桥与找角度另计。',fixed:{next:'停录后从开放入口拍一条完整上桥动作；另摆扶手曲线与行人的固定镜头。下桥后录向三件套行进的一条，不再折返塔外围。'}},
+  towers:{subtitle:'周三终章 · 灯亮后走到高楼脚下',sequence:'沿街接近高楼 → 人与楼底交代尺度 → 分别定住拍金茂、环球金融、上海中心 → 回到街面的人与楼，收尾离开。',next:'21:30前拍齐三栋楼的主镜头。之后步行到实际允许停靠的路段叫车，22:00前结束。',fixed:{next:'停录后换仰角，分别定住拍金茂层叠轮廓、环球金融顶部和上海中心扭转立面，各留10—15秒；最后回到人与楼底的一组完整动作收尾。'}}
+ }},
  night1:{title:'北外滩 → 桥 → 外滩',summary:'17:00已到北外滩。全程步行约3 - 4公里，含取景与少量折返的预算。',stops:[['north','17:00 - 18:10'],['bridge','18:35 - 18:55'],['creek','18:55 - 19:25'],['origin','19:25 - 20:00'],['peace','20:00 - 20:40'],['customs','20:40 - 22:00']],links:[['整晚步行路线','北外滩滨江绿地小巨蛋','上海海关大楼',['外白渡桥','乍浦路桥','圆明园路','和平饭店']]]},
  night2:{title:'武康路 → 陆家嘴 → 滨江',summary:'两个片区各自步行，只有武康路→陆家嘴一次打车。跨区预留45 - 55分钟，为预算而非实时车程。',taxi:1,stops:[['wukang','17:00 - 17:25'],['court','17:25 - 17:45'],['towers','18:40 - 19:15'],['ring','19:15 - 20:00'],['pearl','20:00 - 20:35'],['museum','20:35 - 22:00']],links:[['武康路步行段','武康大楼','武康庭',[]],['陆家嘴步行段','花园石桥路与东泰路交叉口','浦东美术馆',['明珠环岛与陆家嘴环路交叉口','东方明珠广播电视塔']]]},
  one:{title:'武康路 → 苏州河 → 外滩',summary:'武康路短走后，一次打车进入苏州河。后半晚连续步行，东方明珠和三件套拍隔江远景；想近拍高楼就选择“两晚·第2晚”。',taxi:1,stops:[['wukang','17:00 - 17:25'],['court','17:25 - 17:40'],['creek','18:30 - 19:05'],['bridge','19:05 - 19:25'],['origin','19:25 - 20:00'],['peace','20:00 - 20:40'],['customs','20:40 - 22:00']],links:[['武康路步行段','武康大楼','武康庭',[]],['苏州河至外滩步行段','乍浦路桥','上海海关大楼',['外白渡桥','圆明园路','和平饭店']]]}
@@ -118,10 +129,11 @@ function render(planKey){
  window.CitywalkEntry?.updateLocalNotice(planKey);
  const plan=plans[planKey];document.querySelectorAll('[data-plan]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.plan===planKey)));
  document.getElementById('route-title').textContent=plan.title;document.getElementById('route-summary').textContent=plan.summary;
+ const notes=document.getElementById('route-notes');notes.replaceChildren();notes.hidden=!plan.notes;plan.notes?.forEach(([title,text,label,url])=>{const p=make('p');p.append(make('strong',{},title+'：'),document.createTextNode(text));if(url)p.append(document.createTextNode(' '),link(label+' ↗',url));notes.append(p);});
  const whole=document.getElementById('whole-links');whole.replaceChildren();plan.links.forEach(([label,from,to,waypoints],i)=>whole.append(link(label+' ↗',maps.walk(from,to,waypoints),'action'+(i===0?' primary':''))));
  const list=document.getElementById('route-list'),cards=document.getElementById('spot-cards');list.replaceChildren();cards.replaceChildren();
  plan.stops.forEach(([id,time],i)=>{
-  const s=spots[id],next=plan.stops[i+1],taxi=plan.taxi===i;
+  const s={...spots[id],...plan.overrides?.[id]},next=plan.stops[i+1],taxi=plan.taxi===i;
   const li=make('li'),num=make('span',{class:'route-num'},i+1),rt=make('div',{class:'route-text'}),jump=make('a',{href:'#spot-'+id},s.short);
   rt.append(jump,make('div',{class:'route-time'},time));
   if(next){const leg=make('div',{class:'leg'+(taxi?' taxi':'')});leg.append(make('div',{class:'leg-names'},maps.name(s.poi)+' → '+maps.name(spots[next[0]].poi)),link(taxi?'跨区打车进入下一片区 ↗':'步行去下一站 ↗',maps.walk(s.poi,spots[next[0]].poi,[],taxi?'driving':'walking')));rt.append(leg);}
@@ -152,7 +164,7 @@ function render(planKey){
    manual.append(dl,copy,status);body.append(manual);
   }else{body.append(make('p',{class:'small'},'本片区终点：'+maps.name(s.poi)+'。收机后步行离开核心人流，再导航回程。'));}
   [['站哪儿',s.stand],['朝哪儿',s.face]].forEach(([a,b])=>{const dl=make('dl',{class:'field'});field(dl,a,b);body.append(dl);});
-  const shot=fixedShots[id],fixed=make('section',{class:'fixed-shot',id:'fixed-'+id,'aria-labelledby':'fixed-title-'+id});
+  const shot={...fixedShots[id],...s.fixed},fixed=make('section',{class:'fixed-shot',id:'fixed-'+id,'aria-labelledby':'fixed-title-'+id});
   fixed.append(make('h4',{id:'fixed-title-'+id},'固定机位 · 现场照着拍'),make('p',{class:'fixed-rule'},'先定住3—5秒 → 动作完整经过 → 再留5秒。这一条保持原构图。'));
   const steps=make('ol');
   [['摆画面',shot.frame],['等什么经过',shot.wait],['拍到这里再停',shot.end],['下一条怎么接',shot.next]].forEach(([label,text])=>{const li=make('li');li.append(make('strong',{},label),make('p',{},text));steps.append(li);});

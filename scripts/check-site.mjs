@@ -15,7 +15,7 @@ const mapData=mapContext.window.CITYWALK_MAP_DATA;
 assert.equal(Object.values(spots).filter(s=>s.image).length,8,'Eight real composition references are required');
 for(const id of ['north','bridge','peace','towers','customs'])assert.ok(spots[id].image&&spots[id].stand&&spots[id].face,'Missing requested landmark content: '+id);
 for(const [id,plan]of Object.entries(plans)){
-  assert.equal(id==='night1'?0:1,Number.isInteger(plan.taxi)?1:0,'Incorrect taxi transition count');
+  assert.equal(['night1','wed'].includes(id)?0:1,Number.isInteger(plan.taxi)?1:0,'Incorrect taxi transition count');
   for(const [spot]of plan.stops)assert.ok(spots[spot],'Unknown route stop '+spot);
   for(const stop of plan.stops){const s=spots[stop[0]],shot=fixedShots[stop[0]];assert.ok(s.poi&&s.stand&&s.face&&s.sequence&&s.next,'Incomplete field instructions');assert.ok(shot?.frame&&shot.wait&&shot.end&&shot.next&&shot.fallback,'Missing fixed-shot field task: '+stop[0]);}
   for(let i=0;i<plan.stops.length-1;i++){
@@ -50,7 +50,9 @@ function entryEnvironment(protocol,search,hash,blocked=false){
  vm.createContext(env);vm.runInContext(entrySource,env);
  return{env,redirects,events,anchor,notice};
 }
-for(const plan of ['night1','night2','one']){
+assert.deepEqual(Array.from(plans.wed.stops,s=>s[0]),['museum','pearl','ring','towers'],'Wednesday must progress from riverside dusk to illuminated towers');
+for(const id of ['museum','pearl','ring','towers'])assert.ok(plans.wed.overrides[id].next&&plans.wed.overrides[id].fixed.next,'Wednesday transitions must follow its new walking direction: '+id);
+for(const plan of Object.keys(plans)){
  const r=entryEnvironment('file:','?plan='+plan+'&ignored=value','#fixed-peace');
  assert.equal(r.redirects[0],'https://iamsanpi.github.io/shanghai-night-citywalk/?plan='+plan+'#fixed-peace','Local entry must preserve plan and filming position without forwarding unknown parameters');
 }

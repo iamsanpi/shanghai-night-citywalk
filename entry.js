@@ -3,7 +3,7 @@ window.CitywalkEntry=(()=>{
  const base='https://iamsanpi.github.io/shanghai-night-citywalk/';
  function onlineUrl(plan=new URLSearchParams(location.search).get('plan'),hash=location.hash){
   const url=new URL(base);
-  if(['night1','night2','one'].includes(plan))url.searchParams.set('plan',plan);
+  if(['wed','night1','night2','one'].includes(plan))url.searchParams.set('plan',plan);
   url.hash=/^#(?:map-overview|route-title|fixed-[a-z]+|spot-[a-z]+)$/.test(hash)?hash:'#map-overview';
   return url.href;
  }

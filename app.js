@@ -107,7 +107,9 @@ const fixedShots={
  }
 };
 const plans={
- wed:{title:'周三浦东 · 江边黄昏 → 明珠 → 三件套',summary:'16:00—16:30从浦东办事地点出发，先打车到浦东美术馆附近，再走到西侧公共滨江。争取17:00前抵达；出发地址待补，抵达时间不是车程保证。此后全程步行，连接段约1.8公里，含取景、上桥与找角度留2.5—3.5公里预算。',stops:[['museum','争取16:45 - 17:50'],['pearl','18:10 - 18:45'],['ring','18:50 - 19:25'],['towers','19:45 - 21:30；22:00前离场']],links:[['周三整段步行路线','浦东美术馆','花园石桥路与东泰路交叉口',['东方明珠广播电视塔','明珠环岛与陆家嘴环路交叉口']]],notes:[
+ wed:{title:'周三浦东 · 江边黄昏 → 明珠 → 三件套',summary:'周三16:00—16:30从世纪公园附近出发，打车到浦东美术馆附近，再步行到西侧公共滨江。进场先留45—60分钟总预算，含叫车、车程和下车后10—15分钟找江边；这是行程余量，不是实时导航估时。此后全程步行，连接段约1.8公里，含取景、上桥与找角度留2.5—3.5公里预算。',arrivalDestination:'浦东美术馆',stops:[['museum','约16:45—17:30到，拍至17:50'],['pearl','18:10 - 18:45'],['ring','18:50 - 19:25'],['towers','19:45 - 21:30；22:00前离场']],links:[['周三整段步行路线','浦东美术馆','花园石桥路与东泰路交叉口',['东方明珠广播电视塔','明珠环岛与陆家嘴环路交叉口']]],notes:[
+  ['世纪公园怎么出发','尽量16:00结束就叫车：按总预算安排，约16:45—17:00到江边。若16:30才出发，按17:15—17:30抵达来准备，先拍余晖与江面，不为追落日打乱后面的夜景。公园周边范围较大，上车点用你当天实际所在位置。'],
+  ['叫车目的地与下车走法','目的地填“浦东美术馆”，地址滨江大道2777号。官网指引由富城路近明珠塔路口进；让司机在附近允许停靠的位置下客。下车后沿开放公共步道走到馆西侧、靠黄浦江的平台，见江后朝西至西北拍外滩。这里从室外开始拍，沿途遇围挡就按开放通道走。','馆方交通指引','https://www.museumofartpd.org.cn/visit'],
   ['先拍天色，再拍灯光','先按本周三2026年10月28日安排：上海日落约17:10，民用暮光约17:34结束，天气决定实际天色。江边先拍外滩轮廓、天色与船；18:00后把重点转到明珠和高楼夜景，亮灯以现场为准。','日出日落表','https://www.daysfromdate.com/zh-cn/sunrise/cn/shanghai-shi/shanghai-municipality/'],
   ['拍成三个篇章','①黄昏江面与对岸老上海；②东方明珠、天桥与人车；③走到三件套脚下，以高楼和人物尺度收尾。19:25—19:45先给步行，抵达后三件套段可插入20分钟补给休息。'],
   ['另一晚怎么接','另一晚走“两晚·第1晚”的北外滩 → 外白渡桥 → 乍浦路桥 → 外滩源 → 和平饭店 → 海关。周三不加武康路；武康大楼留给另一个白天或原方案，不塞进这两晚的主线。'],
@@ -130,7 +132,7 @@ function render(planKey){
  const plan=plans[planKey];document.querySelectorAll('[data-plan]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.plan===planKey)));
  document.getElementById('route-title').textContent=plan.title;document.getElementById('route-summary').textContent=plan.summary;
  const notes=document.getElementById('route-notes');notes.replaceChildren();notes.hidden=!plan.notes;plan.notes?.forEach(([title,text,label,url])=>{const p=make('p');p.append(make('strong',{},title+'：'),document.createTextNode(text));if(url)p.append(document.createTextNode(' '),link(label+' ↗',url));notes.append(p);});
- const whole=document.getElementById('whole-links');whole.replaceChildren();plan.links.forEach(([label,from,to,waypoints],i)=>whole.append(link(label+' ↗',maps.walk(from,to,waypoints),'action'+(i===0?' primary':''))));
+ const whole=document.getElementById('whole-links');whole.replaceChildren();if(plan.arrivalDestination)whole.append(link('从当前位置驾车进场 ↗','https://maps.apple.com/directions?'+new URLSearchParams({destination:maps.name(plan.arrivalDestination),mode:'driving'}),'action taxi'));plan.links.forEach(([label,from,to,waypoints],i)=>whole.append(link(label+' ↗',maps.walk(from,to,waypoints),'action'+(i===0?' primary':''))));
  const list=document.getElementById('route-list'),cards=document.getElementById('spot-cards');list.replaceChildren();cards.replaceChildren();
  plan.stops.forEach(([id,time],i)=>{
   const s={...spots[id],...plan.overrides?.[id]},next=plan.stops[i+1],taxi=plan.taxi===i;
